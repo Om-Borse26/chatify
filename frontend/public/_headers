@@ -1,0 +1,4 @@
+/*
+  # Default CSP — restrictive but allows site to run without unsafe-eval.
+  # Only add 'unsafe-eval' here as a temporary emergency measure if a library absolutely needs it.
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' https:; object-src 'none'; base-uri 'self'
