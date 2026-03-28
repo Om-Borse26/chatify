@@ -1,0 +1,14 @@
+[build]
+  command = "npm --prefix frontend run build"
+  publish = "frontend/dist"
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+  force = true
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' https:; object-src 'none'; base-uri 'self'"
