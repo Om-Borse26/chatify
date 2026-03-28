@@ -1,5 +1,9 @@
 [build]
-  command = "npm --prefix frontend run build"
+  # Use the root build script so Netlify runs your monorepo orchestrator
+  # (the root `package.json` build script installs backend/frontend and
+  # then builds the frontend). This ensures frontend devDependencies
+  # like `vite` are installed before the build runs.
+  command = "npm run build"
   publish = "frontend/dist"
 
 [[redirects]]
