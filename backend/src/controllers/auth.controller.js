@@ -65,7 +65,12 @@ export const signup = async (req, res) => {
 
 export const login = async (req, res) => {
     const { email, password } = req.body
+
     try {
+        if (!email || !password) {
+            return res.status(400).json({ message: "Email and Password are required" });
+        }
+
         const user = await User.findOne({ email });
         if (!user) return res.status(400).json({ message: "Invalid credentials" });
         //never tell the client which one is incorrect
@@ -90,6 +95,10 @@ export const login = async (req, res) => {
 
 
 export const logout = (_, res) => {
-    res.cookie("jwt", "", { maxAge: 0 });
+    res.clearCookie("jwt", {
+        httpOnly: true,
+        sameSite: "strict",
+        secure: ENV.NODE_ENV === "development" ? false : true,
+    });
     res.status(200).json({ message: "Logged out successfully" });
 };
